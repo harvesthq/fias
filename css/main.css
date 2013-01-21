@@ -1,0 +1,8 @@
+.github-badge {
+  height: 50px;
+}
+
+.github-badge + .btn {
+  height: 60px;
+}
+

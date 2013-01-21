@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>FIAS Calculator</title>
+  <meta name="description" content="Quick questionaire to calculate the FIAS Calculator.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <style>
+    body {
+      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    }
+  </style>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.knob.js"></script>
+	<script src="/js/main.js"></script>
+
+  <script>
+    $(function() {
+      new FIASCalculator()
+    });
+  </script>
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">FIAS Calculator</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+        <input type="text" value="1" data-dial="0" data-message-id="message1" />
+      </div>
+      <div class="span8">
+        <h2>How much of the app is affected?</h2>
+        <div class="row">
+          <div id="message1" class="lead alert alert-success span6">
+            Equivalent to a single partial
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span3">
+        <input type="text" value="1" data-dial="1" data-message-id="message2" />
+      </div>
+      <div class="span8">
+        <h2>How much of this change is mysterious to you?</h2>
+        <div class="row">
+          <div id="message2" class="lead alert alert-warning span6">
+            I understand what it's doing, but I'm not 100% sure about parts
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span3">
+        <input type="text" value="1" data-dial="2" data-message-id="message3"/>
+      </div>
+      <div class="span8">
+        <h2>How easy is it for you to imagine this performs in an unexpected way after deployment?</h2>
+
+        <div class="row">
+          <div id="message3" class="lead alert alert-error span6">
+            I can imagine about 400 ways this blows up.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span4 offset1">
+        <input type="text" value="14" id="final-score" data-message-id="final-message" />
+      </div>
+
+      <div class="span5" style="margin-top: 100px">
+        <span class="help-inline">Github Badge</span>
+        <div class="input-append">
+          <textarea rows="3" id="final-message" class="github-badge input-xlarge uneditable-input">[FIAS Score:7/7/9=23](http://google.com?foo=1)</textarea>
+          <button class="btn btn-primary btn-large" type="button">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container -->
+</body>
+</html>
