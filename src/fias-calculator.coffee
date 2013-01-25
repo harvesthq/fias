@@ -154,18 +154,22 @@ class FinalScore
       sum + v
     , 0)
 
-    index = if @total <= 14 then 0
+    @index = if @total <= 14 then 0
     else if @total >= 15 && @total <= 19 then 1
     else 2
 
-    @scoreColor = new ScoreColor(index)
+    @scoreColor = new ScoreColor(@index)
     @css        = @scoreColor.css
     @color      = @scoreColor.color
 
   cssClasses: -> @scoreColor.cssClasses()
 
   message: ->
-    "[FIAS: #{@values.join(" / ")} = #{@total}](#{window.location.origin}#{window.location.pathname}#{@queryString()})"
+    emoji = switch @index
+      when 0 then ":ok_hand:"
+      when 1 then ":warning:"
+      when 2 then ":bomb:"
+    "[#{emoji} FIAS: #{@values.join(" / ")} = #{@total}](#{window.location.origin}#{window.location.pathname}#{@queryString()})"
 
   queryString: -> "?#{$.param(v1:@values[0], v2:@values[1], v3:@values[2])}"
 

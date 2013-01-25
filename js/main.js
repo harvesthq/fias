@@ -184,13 +184,12 @@
   FinalScore = (function() {
 
     function FinalScore(values) {
-      var index;
       this.values = values;
       this.total = values.reduce(function(sum, v) {
         return sum + v;
       }, 0);
-      index = this.total <= 14 ? 0 : this.total >= 15 && this.total <= 19 ? 1 : 2;
-      this.scoreColor = new ScoreColor(index);
+      this.index = this.total <= 14 ? 0 : this.total >= 15 && this.total <= 19 ? 1 : 2;
+      this.scoreColor = new ScoreColor(this.index);
       this.css = this.scoreColor.css;
       this.color = this.scoreColor.color;
     }
@@ -200,7 +199,18 @@
     };
 
     FinalScore.prototype.message = function() {
-      return "[FIAS: " + (this.values.join(" / ")) + " = " + this.total + "](" + window.location.origin + window.location.pathname + (this.queryString()) + ")";
+      var emoji;
+      emoji = (function() {
+        switch (this.index) {
+          case 0:
+            return ":ok_hand:";
+          case 1:
+            return ":warning:";
+          case 2:
+            return ":bomb:";
+        }
+      }).call(this);
+      return "[" + emoji + " FIAS: " + (this.values.join(" / ")) + " = " + this.total + "](" + window.location.origin + window.location.pathname + (this.queryString()) + ")";
     };
 
     FinalScore.prototype.queryString = function() {
