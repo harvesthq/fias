@@ -33,8 +33,9 @@ class FIASCalculator
     $("[data-dial]").each ->
       changed.call($(@).data("knob"), $(@).val())
 
+    @setupCopyButton()
+
   changed: (value) ->
-    console.log("changed")
     value = fixValue(@, value)
     $input = $(@.i)
     $message = $input.message()
@@ -57,6 +58,22 @@ class FIASCalculator
       knob.$.trigger("configure", {fgColor:score.color})
       $message = knob.$.message()
       $message.html(score.message())
+
+  setupCopyButton: ->
+    ZeroClipboard.setMoviePath('/js/ZeroClipboard10.swf')
+    clip = new ZeroClipboard.Client()
+    clip.glue("final-copy-btn", "final-copy-btn-div")
+    clip.addEventListener("mouseDown", (client) ->
+      client.setText($("#final-message").val())
+    )
+    clip.addEventListener("complete", ->
+      btn = $("#final-copy-btn")
+      btn.data("old-html", btn.html())
+      btn.html("Copied!")
+      setTimeout(() ->
+        btn.html(btn.data("old-html"))
+      , 2000)
+    )
 
 class Score
   messages = [

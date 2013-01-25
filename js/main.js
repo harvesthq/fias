@@ -43,11 +43,11 @@
       $("[data-dial]").each(function() {
         return changed.call($(this).data("knob"), $(this).val());
       });
+      this.setupCopyButton();
     }
 
     FIASCalculator.prototype.changed = function(value) {
       var $input, $message, score;
-      console.log("changed");
       value = fixValue(this, value);
       $input = $(this.i);
       $message = $input.message();
@@ -75,6 +75,25 @@
         $message = knob.$.message();
         return $message.html(score.message());
       }
+    };
+
+    FIASCalculator.prototype.setupCopyButton = function() {
+      var clip;
+      ZeroClipboard.setMoviePath('/js/ZeroClipboard10.swf');
+      clip = new ZeroClipboard.Client();
+      clip.glue("final-copy-btn", "final-copy-btn-div");
+      clip.addEventListener("mouseDown", function(client) {
+        return client.setText($("#final-message").val());
+      });
+      return clip.addEventListener("complete", function() {
+        var btn;
+        btn = $("#final-copy-btn");
+        btn.data("old-html", btn.html());
+        btn.html("Copied!");
+        return setTimeout(function() {
+          return btn.html(btn.data("old-html"));
+        }, 2000);
+      });
     };
 
     return FIASCalculator;
