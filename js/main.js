@@ -200,7 +200,7 @@
     };
 
     FinalScore.prototype.message = function() {
-      return "[FIAS: " + (this.values.join(" / ")) + " = " + this.total + "](" + window.location.origin + (this.queryString()) + ")";
+      return "[FIAS: " + (this.values.join(" / ")) + " = " + this.total + "](" + window.location.origin + window.location.pathname + (this.queryString()) + ")";
     };
 
     FinalScore.prototype.queryString = function() {

@@ -165,7 +165,7 @@ class FinalScore
   cssClasses: -> @scoreColor.cssClasses()
 
   message: ->
-    "[FIAS: #{@values.join(" / ")} = #{@total}](#{window.location.origin}#{@queryString()})"
+    "[FIAS: #{@values.join(" / ")} = #{@total}](#{window.location.origin}#{window.location.pathname}#{@queryString()})"
 
   queryString: -> "?#{$.param(v1:@values[0], v2:@values[1], v3:@values[2])}"
 
