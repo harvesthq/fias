@@ -22,3 +22,10 @@
 
 * **15 or greater** should require **two devs to +1 (and probably some click testing)**.
 * **20 or greater** should trigger an **auto QA of all affected areas**.
+
+## Deploying
+
+To "deploy" it just push it to the gh-pages branch.
+
+If you make any changes to the stylesheets or coffescript, update the "version" to invalidate 
+people's browse cache https://github.com/harvesthq/fias/commit/3af36ea7ccdae27e7efbfab9a11b85a57e62f173
