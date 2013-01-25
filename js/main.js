@@ -39,6 +39,7 @@
         height: 400,
         readOnly: true
       });
+      this.parseURL();
       changed = this.changed;
       $("[data-dial]").each(function() {
         return changed.call($(this).data("knob"), $(this).val());
@@ -73,7 +74,31 @@
           fgColor: score.color
         });
         $message = knob.$.message();
-        return $message.html(score.message());
+        $message.html(score.message());
+        return score.updateURL();
+      }
+    };
+
+    FIASCalculator.prototype.parseURL = function() {
+      var values;
+      if (window.location.search) {
+        values = [this.getParameterByName("v1"), this.getParameterByName("v2"), this.getParameterByName("v3")];
+        return $("[data-dial]").each(function(i, elem) {
+          return $(elem).data("knob").val(values[i]);
+        });
+      }
+    };
+
+    FIASCalculator.prototype.getParameterByName = function(name) {
+      var regex, regexS, results;
+      name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      regexS = "[\\?&]" + name + "=([^&#]*)";
+      regex = new RegExp(regexS);
+      results = regex.exec(window.location.search);
+      if (results === null) {
+        return "";
+      } else {
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
       }
     };
 
@@ -170,12 +195,24 @@
       this.color = this.scoreColor.color;
     }
 
-    FinalScore.prototype.message = function() {
-      return "FIAS: " + (this.values.join(" / ")) + " = " + this.total;
-    };
-
     FinalScore.prototype.cssClasses = function() {
       return this.scoreColor.cssClasses();
+    };
+
+    FinalScore.prototype.message = function() {
+      return "[FIAS: " + (this.values.join(" / ")) + " = " + this.total + "](" + window.location.origin + (this.queryString()) + ")";
+    };
+
+    FinalScore.prototype.queryString = function() {
+      return "?" + ($.param({
+        v1: this.values[0],
+        v2: this.values[1],
+        v3: this.values[2]
+      }));
+    };
+
+    FinalScore.prototype.updateURL = function() {
+      return window.history.replaceState(null, null, this.queryString());
     };
 
     return FinalScore;

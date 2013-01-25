@@ -29,6 +29,8 @@ class FIASCalculator
       height: 400
       readOnly: true
 
+    @parseURL()
+
     changed = @changed
     $("[data-dial]").each ->
       changed.call($(@).data("knob"), $(@).val())
@@ -58,6 +60,28 @@ class FIASCalculator
       knob.$.trigger("configure", {fgColor:score.color})
       $message = knob.$.message()
       $message.html(score.message())
+      score.updateURL()
+
+  parseURL: ->
+    if window.location.search
+      values = [
+        @getParameterByName("v1"),
+        @getParameterByName("v2"),
+        @getParameterByName("v3")
+      ]
+      $("[data-dial]").each (i, elem) ->
+        $(elem).data("knob").val(values[i])
+
+  # Stolen shamelessly from http://stackoverflow.com/a/901144/410759
+  getParameterByName: (name) ->
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]")
+    regexS = "[\\?&]" + name + "=([^&#]*)"
+    regex = new RegExp(regexS)
+    results = regex.exec(window.location.search)
+    if(results == null)
+      return ""
+    else
+      return decodeURIComponent(results[1].replace(/\+/g, " "))
 
   setupCopyButton: ->
     ZeroClipboard.setMoviePath('/js/ZeroClipboard10.swf')
@@ -138,9 +162,14 @@ class FinalScore
     @css        = @scoreColor.css
     @color      = @scoreColor.color
 
-  message: -> "FIAS: #{@values.join(" / ")} = #{@total}"
-
   cssClasses: -> @scoreColor.cssClasses()
 
+  message: ->
+    "[FIAS: #{@values.join(" / ")} = #{@total}](#{window.location.origin}#{@queryString()})"
+
+  queryString: -> "?#{$.param(v1:@values[0], v2:@values[1], v3:@values[2])}"
+
+  updateURL: ->
+    window.history.replaceState(null, null, @queryString())
 
 window.FIASCalculator = FIASCalculator
