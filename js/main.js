@@ -104,7 +104,7 @@
 
     FIASCalculator.prototype.setupCopyButton = function() {
       var clip;
-      ZeroClipboard.setMoviePath('/js/ZeroClipboard10.swf');
+      ZeroClipboard.setMoviePath('js/ZeroClipboard10.swf');
       clip = new ZeroClipboard.Client();
       clip.glue("final-copy-btn", "final-copy-btn-div");
       clip.addEventListener("mouseDown", function(client) {
