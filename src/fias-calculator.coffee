@@ -103,8 +103,8 @@ class Score
   messages = [
     [
       "Equivalent to a single partial",
-        "A small handful of views",
-        "It's everywhere, like the plague",
+      "A small handful of views",
+      "It's everywhere, like the plague",
     ]
     [
       "Nothing - it's straight forward",
@@ -112,7 +112,7 @@ class Score
       "It's freaking greek",
     ]
     [
-      "Dude, it's a copy change",
+      "C'mon - it's a copy change",
       "I could see some potential for problems, but they seem unlikely to have humongous impact",
       "I can imagine about 400 ways this blows up",
     ]
