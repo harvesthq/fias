@@ -147,6 +147,14 @@ class ScoreColor
 
   cssClasses: -> colors.map (color) -> color.css
 
+class ReviewLevel
+  messages = [ "(needs one +1)",
+               "(needs two +1s)",
+               "(needs two +1s and full QA)" ]
+
+  constructor: (index) ->
+    @message = messages[index]
+
 class FinalScore
   constructor: (values) ->
     @values = values
@@ -158,18 +166,21 @@ class FinalScore
     else if @total >= 15 && @total <= 19 then 1
     else 2
 
-    @scoreColor = new ScoreColor(@index)
-    @css        = @scoreColor.css
-    @color      = @scoreColor.color
+    @scoreColor  = new ScoreColor(@index)
+    @reviewLevel = new ReviewLevel(@index)
+    @css         = @scoreColor.css
+    @color       = @scoreColor.color
 
   cssClasses: -> @scoreColor.cssClasses()
 
   message: ->
+    url = "#{window.location.origin}#{window.location.pathname}#{@queryString()}"
+
     emoji = switch @index
       when 0 then ":ok_hand:"
       when 1 then ":warning:"
       when 2 then ":bomb:"
-    "[#{emoji} FIAS: #{@values.join(" / ")} = #{@total}](#{window.location.origin}#{window.location.pathname}#{@queryString()})"
+    "[#{emoji} FIAS: #{@values.join(" / ")} = #{@total}](#{url}) -- #{@reviewLevel.message}"
 
   queryString: -> "?#{$.param(v1:@values[0], v2:@values[1], v3:@values[2])}"
 
