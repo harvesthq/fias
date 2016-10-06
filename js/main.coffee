@@ -96,15 +96,15 @@ class Score
     [
       "Equivalent to a single partial",
       "A small handful of views",
-      "It's everywhere, like the plague",
+      "Itʼs everywhere, like the plague",
     ]
     [
-      "Nothing - it's straight forward",
-      "I understand what it's doing, but I'm not 100% sure about parts",
-      "It's freaking greek",
+      "Nothing - itʼs straight forward",
+      "I understand what itʼs doing, but Iʼm not 100% sure about parts",
+      "Itʼs freaking greek",
     ]
     [
-      "C'mon - it's a copy change",
+      "Cʼmon - itʼs a copy change",
       "I could see some potential for problems, but they seem unlikely to have humongous impact",
       "I can imagine about 400 ways this blows up",
     ]
