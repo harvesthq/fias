@@ -79,7 +79,9 @@
           <textarea rows="3" id="final-message" class="github-badge input-xxlarge uneditable-input">[FIAS Score:7/7/9=23](http://google.com?foo=1)</textarea>
         </div>
         <div style="position:relative" id="final-copy-btn-div">
-          <button id="final-copy-btn" class="btn btn-primary btn-large" title="Click to copy me.">Copy to Clipboard</button>
+          <button id="final-copy-btn" class="btn btn-primary btn-large" title="Click to copy me." data-clipboard-target="#final-message">
+            Copy to Clipboard
+          </button>
         </div>
       </div>
     </div>
@@ -87,10 +89,10 @@
   </div> <!-- /container -->
 </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script src="js/ZeroClipboard.js"></script>
+  <script src="js/clipboard.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.knob.js"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js"></script>
 
   <script>
     $(function() {
