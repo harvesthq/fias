@@ -25,7 +25,7 @@
 
 ## Deploying
 
-To "deploy" it just push it to the master branch.
+To "deploy" it just merge the PR.
 
 If you make any changes to the stylesheets or coffescript, update the "version" to invalidate
 people's browser cache https://github.com/harvesthq/fias/commit/3af36ea7ccdae27e7efbfab9a11b85a57e62f173
